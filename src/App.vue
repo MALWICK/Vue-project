@@ -1,9 +1,18 @@
-<script setup>
-</script>
-
 <template>
-  <p>dnoeoi</p>
+ <div class="container">
+ <Headers />
+ </div>
 </template>
+
+<script>
+import Headers from './components/Header.vue';
+export default {
+  name: 'App',
+  components: {
+  Headers,
+  }
+}
+</script>
 
 <style scoped>
 
