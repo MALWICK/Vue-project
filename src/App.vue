@@ -1,6 +1,6 @@
 <template>
  <div class="container">
- <Headers />
+ <Headers title="Task Tracker" />
  </div>
 </template>
 
