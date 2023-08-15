@@ -23,7 +23,7 @@ export default {
  .header {
       display: flex;
       align-items: center;
-      justify-content: center;  
+      justify-content: space-between;  
     }
 </style>
    

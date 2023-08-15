@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Headers title="Task Tracker" />
-    <Tasks :tasks="tasks"/>
+    <Tasks v-bind:tasks="tasks"/>
   </div>
 </template>
 

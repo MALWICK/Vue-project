@@ -1,14 +1,19 @@
 <template>
-    <div class="my-task">
-        <h1>My Tasks</h1>
-    </div>
+  <div class="my-task" :key="task.id" v-for="task in tasks">
+    <Task  :task="task"/>
+  </div>
 </template>
 
 <script>
+import Task from './Task.vue'
 export default {
-    name: "My-Tasks",
-    props: {
-        tasks: Array
-    }
+  name: 'My-Tasks',
+  props: {
+    tasks: Array
+  },
+
+  components: {
+    Task
+  }
 }
 </script>
