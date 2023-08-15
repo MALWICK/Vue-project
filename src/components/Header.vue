@@ -1,7 +1,7 @@
 <template>
-  <header class="headers">
+  <div class="header" >
     <h1>Task Tracker</h1>
-  </header>
+  </div>
 </template>
 
 <script>
@@ -10,5 +10,10 @@ export default {
 }
 </script>
 
-<Style scoped>
-</Style>
+<style scoped>
+ .header {
+      display: flex;
+      justify-content: center;  
+    }
+</style>
+   
