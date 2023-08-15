@@ -1,15 +1,20 @@
 <template>
- <div class="container">
- <Headers title="Task Tracker" />
- </div>
+  <div class="container">
+    <Headers title="Task Tracker" />
+  </div>
 </template>
 
 <script>
-import Headers from './components/Header.vue';
+import Headers from './components/Header.vue'
 export default {
   name: 'App',
   components: {
-  Headers,
+    Headers
+  },
+  data() {
+    return {
+      tasks: [],
+    }
   }
 }
 </script>
@@ -51,7 +56,6 @@ export default {
   display: block;
   width: 100%;
 }
-
 
 @media (min-width: 1024px) {
 }

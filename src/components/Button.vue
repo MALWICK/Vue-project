@@ -1,6 +1,6 @@
 <template>
-    <div class="button-holder">
-<button class="My-add" :style="{ background : color }" type="button">{{ text }}</button>
+    <div  class="button-holder">
+<button @click="onClick()" class="My-add" :style="{ background : color }" type="button">{{ text }}</button>
     </div>
 </template>
 
@@ -10,7 +10,11 @@ export default  {
     props: {
         text: String,
         color: String,
-        
+    },
+    methods:{
+        onClick(){
+            console.log("ididor")
+        }
     }
 }
 </script>
