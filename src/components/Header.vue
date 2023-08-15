@@ -1,13 +1,21 @@
 <template>
   <div class="header" >
     <h1>{{ title }}</h1>
+    <AddButton />
   </div>
 </template>
 
 <script>
+import AddButton from './Button.vue'
+
 export default {
     name: 'My-Header',
-    props: ['title']
+    props:{ 
+        title: String
+    },
+    components: {
+       AddButton
+    }
 }
 </script>
 
