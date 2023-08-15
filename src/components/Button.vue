@@ -1,11 +1,36 @@
 <template>
     <div class="button-holder">
-<button class="My-add" type="button">Add Task</button>
+<button class="My-add" :style="{ background : color }" type="button">{{ text }}</button>
     </div>
 </template>
 
 <script>
 export default  {
     name: 'add-Button',
+    props: {
+        text: String,
+        color: String,
+        
+    }
 }
 </script>
+
+<style scoped>
+.My-add {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.My-add:focus {
+  outline: none;
+}
+</style>
