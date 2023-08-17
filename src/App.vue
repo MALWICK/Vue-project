@@ -1,30 +1,49 @@
 <template>
   <div class="container">
-    <Headers title="Task Tracker" /> 
-    <Tasks @delete-task="deleteTask" v-bind:tasks="tasks"/>
+    <Headers @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" />
+    <div v-show="showAddTask">
+      <AddTask @add-task="addTask" />
+    </div>
+    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" v-bind:tasks="tasks" />
   </div>
 </template>
 
 <script>
-
 import Headers from './components/Header.vue'
 import Tasks from './components/Tasks.vue'
+import AddTask from './components/AddTask.vue'
 
 export default {
   name: 'App',
   components: {
     Headers,
     Tasks,
+    AddTask
   },
   data() {
     return {
       tasks: [],
+      showAddTask: false,
     }
   },
-  methods:{
-deleteTask(id){
-  this.tasks = this.tasks.filter((task) => task.id !== id)
-}
+  methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+    }
+    ,
+    addTask(task) {
+      this.tasks = [...this.tasks, task]
+    },
+    deleteTask(id) {
+      if (confirm('Are you sure you want to delete')) {
+        this.tasks = this.tasks.filter((task) => task.id !== id)
+      }
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      )
+    }
   },
   created() {
     this.tasks = [
@@ -38,7 +57,7 @@ deleteTask(id){
         id: 2,
         text: 'Meet at school',
         day: 'March 2nd at 2:00pm',
-        reminder: false,
+        reminder: false
       },
       {
         id: 3,
@@ -69,7 +88,7 @@ deleteTask(id){
 }
 </script>
 
-<style scoped>
+<style >
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 .container {
   max-width: 500px;

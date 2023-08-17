@@ -13,7 +13,7 @@ export default  {
     },
     methods:{
         onClick(){
-            console.log("ididor")
+           this.$emit('btn-click');
         }
     }
 }
