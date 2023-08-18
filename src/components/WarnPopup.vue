@@ -56,7 +56,9 @@ export default {
     font-size: 22px;
     font-weight: 700;
     border-radius: 50%;
+    color: red;
     border: 2px solid lightgray;
+    cursor: pointer;
 }
 
 .inner-container {
@@ -65,5 +67,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 </style>

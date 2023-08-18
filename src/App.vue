@@ -39,12 +39,13 @@ export default {
       this.tasks = [...this.tasks, task]
     },
     deleteTask(id) {
-      if (confirm('Are you sure you want to delete')) {
+     
         this.tasks = this.tasks.filter((task) => task.id !== id)
         // display a success toastnnotification
         const $toast = useToast()
         let instance = $toast.success('deleted successfully')
-      }
+        return instance
+
     },
     toggleReminder(id) {
       this.tasks = this.tasks.map((task) =>
