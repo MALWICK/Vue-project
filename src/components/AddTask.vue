@@ -12,7 +12,7 @@
       <label>Set Reminder</label>
       <input type="checkbox" v-model="reminder" name="reminder" />
     </div>
-    <input type="submit" value="Save Task" class="btn btn-block" />
+    <input type="submit" value="Save Task" :style="{ backgroundColor: isFormValid ? 'black' : 'grey' }" class="btn btn-block" />
     <div  v-show="showWorn" class="warndi">
       <WarnPopupVue :showWarn="showWorn" />
     </div>
@@ -56,6 +56,11 @@ export default {
       console.log(NewTask)
       ;(this.text = ''), (this.day = ''), (this.reminder = false)
     }
+  },
+  computed: {
+   isFormValid(){
+    return this.text && this.day;
+   }
   }
 }
 </script>

@@ -12,6 +12,11 @@
 import Headers from './components/Header.vue'
 import Tasks from './components/Tasks.vue'
 import AddTask from './components/AddTask.vue'
+import { createApp } from 'vue'
+import { useToast } from 'vue-toast-notification'
+const app = createApp({})
+app.mount('#app')
+
 
 export default {
   name: 'App',
@@ -36,6 +41,9 @@ export default {
     deleteTask(id) {
       if (confirm('Are you sure you want to delete')) {
         this.tasks = this.tasks.filter((task) => task.id !== id)
+        // display a success toastnnotification
+        const $toast = useToast()
+        let instance = $toast.success('deleted successfully')
       }
     },
     toggleReminder(id) {
