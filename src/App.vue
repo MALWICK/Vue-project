@@ -1,4 +1,5 @@
 <template>
+ <Suspense>
   <div class="container">
     <Headers @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" />
     <div v-show="showAddTask">
@@ -6,7 +7,10 @@
     </div>
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" v-bind:tasks="tasks" />
   </div>
+ <template #fallback>
   <AppSkeletonVue />
+ </template>
+ </Suspense>
 </template>
 
 <script>
@@ -18,7 +22,7 @@ import { createApp } from 'vue'
 import { useToast } from 'vue-toast-notification'
 const app = createApp({})
 app.mount('#app')
-
+await new Promise((res)=> setTimeout(res,2000))
 
 export default {
   name: 'App',
