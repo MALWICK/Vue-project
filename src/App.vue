@@ -23,14 +23,13 @@ export default {
   data() {
     return {
       tasks: [],
-      showAddTask: false,
+      showAddTask: false
     }
   },
   methods: {
     toggleAddTask() {
       this.showAddTask = !this.showAddTask
-    }
-    ,
+    },
     addTask(task) {
       this.tasks = [...this.tasks, task]
     },
@@ -87,7 +86,7 @@ export default {
   }
 }
 </script>
-
+showWorn
 <style >
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 .container {

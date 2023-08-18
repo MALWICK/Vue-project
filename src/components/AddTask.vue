@@ -14,7 +14,7 @@
     </div>
     <input type="submit" value="Save Task" class="btn btn-block" />
     <div  v-show="showWorn" class="warndi">
-      <WarnPopupVue :warnData="showWorn" />
+      <WarnPopupVue :showWarn="showWorn" />
     </div>
   </form>
 </template>

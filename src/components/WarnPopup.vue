@@ -1,8 +1,8 @@
 <template>
-    <section v-on:click="('warnData')">
+    <section v-if="showWarn">
 <div class="contaner" @click.stop>
     <div class="close" >
-        <span v-on:click="$emit('warnData')" >x</span>
+        <button @click="close">x</button>
     </div>
     <div class="inner-container">
         <h2>please fill in the form above</h2>
@@ -15,6 +15,14 @@
 
 export default {
     name: 'WarnPopup',
+    props: {
+    showWarn: Boolean
+  },
+  methods: {
+    close() {
+        this.$emit('close');
+    }
+  }
    
 }
 </script>
@@ -39,7 +47,7 @@ export default {
     justify-content: right;
 }
 
-.close span {
+.close button {
     width: 30px;
     height: 30px;
     display: flex;
