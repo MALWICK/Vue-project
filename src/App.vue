@@ -6,12 +6,14 @@
     </div>
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" v-bind:tasks="tasks" />
   </div>
+  <AppSkeletonVue />
 </template>
 
 <script>
 import Headers from './components/Header.vue'
 import Tasks from './components/Tasks.vue'
 import AddTask from './components/AddTask.vue'
+import AppSkeletonVue from './components/AppSkeleton.vue'
 import { createApp } from 'vue'
 import { useToast } from 'vue-toast-notification'
 const app = createApp({})
@@ -23,7 +25,8 @@ export default {
   components: {
     Headers,
     Tasks,
-    AddTask
+    AddTask,
+    AppSkeletonVue
   },
   data() {
     return {
@@ -98,6 +101,15 @@ export default {
 showWorn
 <style >
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+*,::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Mouse Memoirs", sans-serif;
+}
+
 .container {
   max-width: 500px;
   margin: 30px auto;

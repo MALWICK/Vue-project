@@ -13,6 +13,7 @@
 import AddButton from './Button.vue'
 
 
+
 export default {
   name: 'My-Header',
   props: {
@@ -20,7 +21,7 @@ export default {
     showAddTask: Boolean
   },
   components: {
-    AddButton
+    AddButton,
   },
 }
 </script>
