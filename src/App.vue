@@ -1,16 +1,16 @@
 <template>
- <Suspense>
-  <div class="container">
-    <Headers @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" />
-    <div v-show="showAddTask">
-      <AddTask @add-task="addTask" />
+  <Suspense>
+    <div class="container">
+      <Headers @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" />
+      <div v-show="showAddTask">
+        <AddTask @add-task="addTask" />
+      </div>
+      <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" v-bind:tasks="tasks" />
     </div>
-    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" v-bind:tasks="tasks" />
-  </div>
- <template #fallback>
-  <AppSkeletonVue />
- </template>
- </Suspense>
+    <template #fallback>
+      <AppSkeletonVue />
+    </template>
+  </Suspense>
 </template>
 
 <script>
@@ -22,7 +22,7 @@ import { createApp } from 'vue'
 import { useToast } from 'vue-toast-notification'
 const app = createApp({})
 app.mount('#app')
-await new Promise((res)=> setTimeout(res,2000))
+await new Promise((res) => setTimeout(res, 2000))
 
 export default {
   name: 'App',
@@ -46,72 +46,44 @@ export default {
       this.tasks = [...this.tasks, task]
     },
     deleteTask(id) {
-     
-        this.tasks = this.tasks.filter((task) => task.id !== id)
-        // display a success toastnnotification
-        const $toast = useToast()
-        let instance = $toast.success('deleted successfully')
-        return instance
-
+      this.tasks = this.tasks.filter((task) => task.id !== id)
+      // display a success toastnnotification
+      const $toast = useToast()
+      let instance = $toast.success('deleted successfully')
+      return instance
     },
     toggleReminder(id) {
       this.tasks = this.tasks.map((task) =>
         task.id === id ? { ...task, reminder: !task.reminder } : task
       )
+    },
+    async fetchTasks() {
+      const res = await fetch('api/tasks')
+      const data = await res.json()
+      return data
+    }
+    , async fetchTask(id) {
+      const res = await fetch(`api/tasks/${id}`)
+      const data = await res.json()
+      return data
     }
   },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: 'Learn Vue',
-        day: 'March 1st at 2:30pm',
-        reminder: true
-      },
-      {
-        id: 2,
-        text: 'Meet at school',
-        day: 'March 2nd at 2:00pm',
-        reminder: false
-      },
-      {
-        id: 3,
-        text: 'Buy Groceries',
-        day: 'March 3rd at 12:30pm',
-        reminder: true
-      },
-      {
-        id: 4,
-        text: 'Learn Vue',
-        day: 'March 4th at 10:30am',
-        reminder: false
-      },
-      {
-        id: 5,
-        text: 'Take out the the dog for a walk',
-        day: 'March 5th at 1:00pm',
-        reminder: true
-      },
-      {
-        id: 6,
-        text: 'Visit grand Mom',
-        day: 'March 6th at 2:00pm',
-        reminder: false
-      }
-    ]
+  async created() {
+    this.tasks = await this.fetchTasks()
   }
 }
 </script>
-showWorn
+
 <style >
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
-*,::before,
+*,
+::before,
 ::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Mouse Memoirs", sans-serif;
+  font-family: 'Mouse Memoirs', sans-serif;
 }
 
 .container {
