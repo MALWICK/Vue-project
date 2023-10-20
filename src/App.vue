@@ -1,128 +1,110 @@
 <template>
-  <Suspense>
-    <div class="container">
-      <Headers @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" />
-      <div v-show="showAddTask">
-        <AddTask @add-task="addTask" />
-      </div>
-      <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" v-bind:tasks="tasks" />
+    <main class="maincontainer">
+        <div class="container">
+      <header>
+        <i class="fa-solid fa-shield"></i>
+      </header>
+      <h4> OTP Verification</h4>
+      <p>We have send an OTP to your'e Email</p>
+      <span>batahemphrey@gmail.com</span>
+      <form action="#">
+        <div class="input-field">
+          <input type="number" placeholder="*"  />
+          <input type="number" disabled placeholder="*" />
+          <input type="number" disabled placeholder="*"  />
+          <input type="number" disabled placeholder="*"  />
+        </div>
+        <button>Verify OTP</button>
+      </form>
     </div>
-    <template #fallback>
-      <AppSkeletonVue />
-    </template>
-  </Suspense>
+    </main>
+
 </template>
 
 <script>
-import Headers from './components/Header.vue'
-import Tasks from './components/Tasks.vue'
-import AddTask from './components/AddTask.vue'
-import AppSkeletonVue from './components/AppSkeleton.vue'
-import { createApp } from 'vue'
-import { useToast } from 'vue-toast-notification'
-const app = createApp({})
-app.mount('#app')
-await new Promise((res) => setTimeout(res, 2000))
-
 export default {
-  name: 'App',
-  components: {
-    Headers,
-    Tasks,
-    AddTask,
-    AppSkeletonVue
-  },
-  data() {
-    return {
-      tasks: [],
-      showAddTask: false
-    }
-  },
-  methods: {
-    toggleAddTask() {
-      this.showAddTask = !this.showAddTask
-    },
-    addTask(task) {
-      this.tasks = [...this.tasks, task]
-    },
-    deleteTask(id) {
-      this.tasks = this.tasks.filter((task) => task.id !== id)
-      // display a success toastnnotification
-      const $toast = useToast()
-      let instance = $toast.success('deleted successfully')
-      return instance
-    },
-    toggleReminder(id) {
-      this.tasks = this.tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder } : task
-      )
-    },
-    async fetchTasks() {
-      const res = await fetch('api/tasks')
-      const data = await res.json()
-      return data
-    }
-    , async fetchTask(id) {
-      const res = await fetch(`api/tasks/${id}`)
-      const data = await res.json()
-      return data
-    }
-  },
-  async created() {
-    this.tasks = await this.fetchTasks()
-  }
+  name: 'UserApplications',
+  
+  
 }
 </script>
 
-<style >
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
-
-*,
-::before,
-::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Mouse Memoirs', sans-serif;
+<style scoped>
+.maincontainer{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #8aa6f51e;
 }
-
+:where(.container, form, .input-field, header) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .container {
-  max-width: 500px;
-  margin: 30px auto;
-  overflow: auto;
-  min-height: 300px;
-  border: 1px solid steelblue;
-  padding: 30px;
-  border-radius: 5px;
+  background: #fff;
+  padding: 30px 65px;
+  border-radius: 12px;
+  row-gap: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-
-.btn {
-  display: inline-block;
-  background: #000;
+.container header {
+  height: 65px;
+  width: 65px;
+  background: #4070f4;
   color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
+  font-size: 2.5rem;
+  border-radius: 50%;
 }
-
-.btn:focus {
+.container h4 {
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: 500;
+}
+form .input-field {
+  flex-direction: row;
+  column-gap: 10px;
+}
+.input-field input {
+  height: 45px;
+  width: 42px;
+  border-radius: 6px;
   outline: none;
+  font-size: 1.125rem;
+  text-align: center;
+  border: 1px solid #ddd;
 }
-
-.btn:active {
-  transform: scale(0.98);
+.input-field input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
-
-.btn-block {
-  display: block;
+.input-field input::-webkit-inner-spin-button,
+.input-field input::-webkit-outer-spin-button {
+  display: none;
+}
+form button {
+  margin-top: 25px;
   width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  padding: 9px 0;
+  cursor: pointer;
+  border-radius: 6px;
+  pointer-events: none;
+  background: #6e93f7;
+  transition: all 0.2s ease;
+}
+form button.active {
+  background: #4070f4;
+  pointer-events: auto;
+}
+form button:hover {
+  background: #0e4bf1;
 }
 
-@media (min-width: 1024px) {
+span {
+  color:gray;
 }
 </style>
