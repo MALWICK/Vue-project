@@ -27,7 +27,7 @@
                     :class="{ shimmer: isLoading }"
                   >
                     <a _ngcontent-tpy-c49="" data-track="select application">
-                      <span _ngcontent-tpy-c49="" class="new-features">{{ item.status }}</span>
+                      <span _ngcontent-tpy-c49="" :class="{ activated: filter === 'Installed' }" class="new-features">{{ item.status }}</span>
                      
                       <div _ngcontent-tpy-c49="" class="service-icon-logo">
                         <img class="smallimg" _ngcontent-tpy-c49="" :src="item.logo" alt="Vend" />
@@ -415,6 +415,10 @@ export default {
   text-align: center;
   font-weight: 700;
   padding: 1px;
+}
+
+.activated {
+  background-color: black;
 }
 
 .smallimg {
