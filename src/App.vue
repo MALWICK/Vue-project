@@ -1,110 +1,416 @@
 <template>
-    <main class="maincontainer">
-        <div class="container">
-      <header>
-        <i class="fa-solid fa-shield"></i>
-      </header>
-      <h4> OTP Verification</h4>
-      <p>We have send an OTP to your'e Email</p>
-      <span>batahemphrey@gmail.com</span>
-      <form action="#">
-        <div class="input-field">
-          <input type="number" placeholder="*"  />
-          <input type="number" disabled placeholder="*" />
-          <input type="number" disabled placeholder="*"  />
-          <input type="number" disabled placeholder="*"  />
+  <div>
+    <div class="container">
+      <div class="innercontainer">
+        <div class="content__body">
+          <div class="actioncontainer">
+            <button class="usedAppsbutton">
+              <i class="fa-solid fa-bolt-lightning"></i> Used Apps
+            </button>
+            <button class="availableapps__btn">
+              <i class="fa-brands fa-adn"></i> Apps Available
+            </button>
+          </div>
+          <div class="apps__display">
+            <div class="appsdisplay__container">
+              <div class="search">
+                <input type="search" name="search" placeholder="seacrch for an app" />
+              </div>
+              <div class="allaplic">
+                <h3>All Applications</h3>
+                <div class="allapliccontainer">
+                  <span _ngcontent-tpy-c49="" class="landing-apps" v-for="item in items" :key="item"
+                    ><a _ngcontent-tpy-c49="" data-track="select application"
+                      ><span _ngcontent-tpy-c49="" class="new-features">{{ item.status }}</span
+                      ><!----><!---->
+                      <div _ngcontent-tpy-c49="" class="service-icon-logo">
+                        <img class="smallimg" _ngcontent-tpy-c49="" :src="item.logo" alt="Vend" />
+                      </div>
+                      <p _ngcontent-tpy-c49="">{{ item.apptitle }}</p></a
+                    ><!----></span
+                  >
+                </div>
+                <div class="loadmore">
+                  <button class="loadmore__btn">Load More</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <button>Verify OTP</button>
-      </form>
+      </div>
     </div>
-    </main>
-
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'UserApplications',
-  
-  
-}
+name: "UsersApplication",
+data() {
+    return {
+      items: [
+        {
+          apptitle: 'Vend',
+          logo: 'https://pipedream.com/s.v0/app_mWnhAp/logo/48',
+          status: 'Download'
+        },
+        {
+          apptitle: 'Airtable',
+          logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYI0SdC_3xBMmEvh43Dao1SI9Y_n7qqFeSbQ&usqp=CAU',
+          status: 'in use'
+        },
+        {
+          apptitle: 'shippo',
+          logo: 'https://assets-global.website-files.com/6462967bbf70fa5b5b227351/646bd3ac70ee08fca9869afe_shippo-logo-dark.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Loyverse',
+          logo: 'https://loyverse.com/sites/all/themes/loyversecom/logo.svg',
+          status: 'in use'
+
+        },
+        {
+          apptitle: 'storyChief',
+          logo: 'https://assets-global.website-files.com/62d66b587db794f6131223e0/62d679136a81955d33635572_logo.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Kanban Tools',
+          logo: 'https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/03/2a/24/032a241c-50ad-8fde-bfa4-cd5031e85b23/AppIcon-0-0-1x_U007emarketing-0-0-0-10-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Netlify',
+          logo: 'https://cdn.sanity.io/images/o0o2tn5x/production/b7112574694a0fd30064faaa252ad555777cb439-1200x676.png?',
+          status: 'in use'
+
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Mailchimp',
+          logo: 'https://assets.stickpng.com/thumbs/58417f77a6515b1e0ad75a2c.png',
+          status: 'Download'
+        },
+        {
+          apptitle: 'Etsy',
+          logo: 'https://1000logos.net/wp-content/uploads/2017/12/Etsy-emblem.jpg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Basin',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        } ,  {
+          apptitle: 'Aweber',
+          logo: 'https://www.simplesat.io/wp-content/uploads/2021/12/aweber.png',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg'
+          , status: 'in use'
+        },
+        {
+          apptitle: 'Amazon SQS',
+          logo: 'https://miro.medium.com/v2/resize:fit:360/1*qoA4HkaQTAAWHb_tMTi0UA.png',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Basecamp',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg'
+          , status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+           status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        },
+        {
+          apptitle: 'Zoom',
+          logo: 'https://st2.zoom.us/static/6.3.16094/image/new/topNav/Zoom_logo.svg',
+          status: 'in use'
+        },
+      ]
+    }
+}}
 </script>
 
 <style scoped>
-.maincontainer{
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #8aa6f51e;
-}
-:where(.container, form, .input-field, header) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 .container {
-  background: #fff;
-  padding: 30px 65px;
-  border-radius: 12px;
-  row-gap: 20px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-.container header {
-  height: 65px;
-  width: 65px;
-  background: #4070f4;
-  color: #fff;
-  font-size: 2.5rem;
-  border-radius: 50%;
-}
-.container h4 {
-  font-size: 1.25rem;
-  color: #333;
-  font-weight: 500;
-}
-form .input-field {
-  flex-direction: row;
-  column-gap: 10px;
-}
-.input-field input {
-  height: 45px;
-  width: 42px;
-  border-radius: 6px;
-  outline: none;
-  font-size: 1.125rem;
-  text-align: center;
-  border: 1px solid #ddd;
-}
-.input-field input:focus {
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-}
-.input-field input::-webkit-inner-spin-button,
-.input-field input::-webkit-outer-spin-button {
-  display: none;
-}
-form button {
-  margin-top: 25px;
   width: 100%;
-  color: #fff;
-  font-size: 1rem;
-  border: none;
-  padding: 9px 0;
-  cursor: pointer;
-  border-radius: 6px;
-  pointer-events: none;
-  background: #6e93f7;
-  transition: all 0.2s ease;
-}
-form button.active {
-  background: #4070f4;
-  pointer-events: auto;
-}
-form button:hover {
-  background: #0e4bf1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-span {
-  color:gray;
+.innercontainer {
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: orange; */
 }
+
+.content__body {
+  width: 75%;
+  /*  background: green; */
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+}
+
+.actioncontainer {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0.5rem 0;
+  padding-bottom: 0;
+  padding-top: 0;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.usedAppsbutton {
+  border: 2px solid hsla(0, 0%, 50%, 0.8);
+  box-shadow: 0 7px 30px -10px rgb(150 170 180/50%);
+  width: 200px;
+  background-color: #f6f9ff;
+  background-color: #fff;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  z-index: 1;
+  align-self: stretch;
+  position: relative;
+  min-height: 55px;
+  border-radius: 0.5rem;
+}
+
+.availableapps__btn {
+  border: 2px solid #0077f4;
+  box-shadow: 0 7px 30px -10px rgb(150 170 180/50%);
+  width: 200px;
+  background-color: #f6f9ff;
+  color: #2e2f31;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  z-index: 1;
+  align-self: stretch;
+  position: relative;
+  min-height: 55px;
+  border-radius: 0.5rem;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* .media-items {
+    display: grid;
+    grid-template-columns: 50px 1fr 40px;
+    padding: 0;
+    width: 230px;
+    min-height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width: 100%;
+   
+} */
+
+.apps__display {
+  width: 100%;
+  margin-top: 26px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 0.5rem;
+}
+
+.appsdisplay__container {
+  width: 100%;
+}
+
+.search {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.search input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 0.5rem;
+  border: 2px solid #0077f4;
+}
+
+.allaplic {
+  width: 100%;
+}
+
+.allaplic h3 {
+  font-family: 'open sans Helvetica sans-serif';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 22px;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.service-icon-logo {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 35px;
+  box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-right: 10px;
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.service-icon-logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.landing-apps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  width: 202px;
+  min-height: 74px;
+  background-color: #fff;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+}
+
+.landing-apps:hover {
+  border: 1px solid #0077f4;
+  cursor: pointer;
+}
+
+.landing-apps a {
+  padding: 1rem 0.7rem 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #000;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 12px;
+  line-height: 19px;
+  font-style: normal;
+}
+.new-features {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 10px;
+  background-color: #00c3ff;
+  color: #fff;
+  border-radius: 0 0.75rem;
+  width: 80px;
+  text-align: center;
+  font-weight: 700;
+  padding: 1px;
+}
+
+.smallimg {
+  width: 80%;
+  height: 50%;
+}
+
+.loadmore {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.loadmore__btn {
+  color: #fff;
+  font-weight: 600;
+  position: relative;
+  background-color: #000000;
+  border-radius: 25px;
+  text-align: center;
+  padding: 10px 30px;
+  width: 200px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.loadmore__btn:hover {
+  background-color: #464343;
+}
+
+.allapliccontainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
 </style>
