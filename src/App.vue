@@ -24,6 +24,7 @@
                     class="landing-apps"
                     v-for="item in filteredItems"
                     :key="item"
+                    :class="{ shimmer: isLoading }"
                   >
                     <a _ngcontent-tpy-c49="" data-track="select application">
                       <span _ngcontent-tpy-c49="" class="new-features">{{ item.status }}</span>
@@ -181,7 +182,8 @@ export default {
         }
       ],
       filter: "Download",
-      title: "All Applications"
+      title: "All Applications",
+       isLoading: true,
     };
   },
   computed: {
@@ -198,13 +200,25 @@ export default {
   methods: {
     showDownloadedApps() {
       this.filter = "Download";
-      this.title ="Download More Apps"
+      this.title ="Download More Apps";
+      setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
     },
     showInstalledApps() {
       this.filter = "Installed";
-      this.title = "Installed App"
+      this.title = "Installed App";
+     
+      this.isLoading = false;
+   
     }
-  }
+  },
+   mounted() {
+    
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+  },
 };
 </script>
 
@@ -442,4 +456,18 @@ export default {
   flex-wrap: wrap;
   gap: 8px 20px;
 }
+
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, #f6f7f8 8%, #eaebed 18%, #f6f7f8 33%);
+  background-size: 800px 104px;
+  animation: shimmer 1s infinite linear;
+}
+
 </style>
