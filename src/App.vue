@@ -17,7 +17,7 @@
                 <input type="search" name="search" placeholder="search for an app" />
               </div>
               <div class="allaplic">
-                <h3>{{ title }}</h3>
+                <h3>{{ title }} (  {{ filter === 'Installed' ? installedAppsCount : availableAppsCount }} )</h3>
                 <div class="allapliccontainer">
                   <span
                     _ngcontent-tpy-c49=""
@@ -195,6 +195,12 @@ export default {
       } else  {
         return this.items;
       }
+    },
+    installedAppsCount() {
+      return this.items.filter(item => item.status.toLowerCase() === "installed").length;
+    },
+    availableAppsCount() {
+      return this.items.filter(item => item.status.toLowerCase() === "download").length;
     }
   },
   methods: {
