@@ -237,7 +237,7 @@ export default {
 }
 
 .innercontainer {
-  width: 80%;
+  width: 87%;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -246,8 +246,7 @@ export default {
 }
 
 .content__body {
-  width: 75%;
-  /*  background: green; */
+  width: 98%;  /*  background: green; */
   /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
 }
 
@@ -302,20 +301,10 @@ export default {
 }
 
 
-/* .media-items {
-    display: grid;
-    grid-template-columns: 50px 1fr 40px;
-    padding: 0;
-    width: 230px;
-    min-height: 50px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    max-width: 100%;
-   
-} */
-
 .apps__display {
   width: 100%;
+  height: 63.559322033898304vh;
+  min-height: 63.559322033898304vh;
   margin-top: 26px;
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -324,6 +313,23 @@ export default {
 
 .appsdisplay__container {
   width: 100%;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.appsdisplay__container::-webkit-scrollbar {
+  width: 9px;               /* width of the entire scrollbar */
+}
+
+.appsdisplay__container::-webkit-scrollbar-track {
+  background: rgba(241, 239, 239, 0.39);
+  border-radius: 0.8rem;        /* color of the tracking area */
+}
+
+.appsdisplay__container::-webkit-scrollbar-thumb {
+ background-color: rgb(155, 155, 156);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgba(204, 203, 201, 0.637);  /* creates padding around scroll thumb */
 }
 
 .search {
@@ -340,6 +346,8 @@ export default {
 
 .allaplic {
   width: 100%;
+  /* background: orange; */
+ 
 }
 
 .allaplic h3 {
@@ -353,8 +361,8 @@ export default {
 }
 
 .service-icon-logo {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   flex: 0 0 35px;
   box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
   background-color: #fff;
@@ -380,8 +388,8 @@ export default {
   max-width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.75rem;
-  width: 252px;
-  min-height: 104px;
+  width: 272px;
+  min-height: 124px;
   background-color: #fff;
   transform: translateY(0);
   -webkit-transform: translateY(0);
