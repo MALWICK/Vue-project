@@ -1,33 +1,34 @@
 <template>
-  <main class="maincontainer">
-    <div class="container">
+    <main class="maincontainer">
+        <div class="container">
       <header>
         <i class="fa-solid fa-shield"></i>
       </header>
-      <h4>OTP Verification</h4>
+      <h4> OTP Verification</h4>
       <p>We have send an OTP to your'e Email</p>
       <span>batahemphrey@gmail.com</span>
       <form action="#">
         <div class="input-field">
-          <input type="number" placeholder="*" />
+          <input type="number" placeholder="*"  />
           <input type="number" disabled placeholder="*" />
-          <input type="number" disabled placeholder="*" />
-          <input type="number" disabled placeholder="*" />
+          <input type="number" disabled placeholder="*"  />
+          <input type="number" disabled placeholder="*"  />
         </div>
-        <button>Verify OTP <i class="fa-solid fa-angle-right"></i></button>
+        <button class="btn">Verify OTP <i class="fa-solid fa-angle-right"></i></button>
       </form>
     </div>
-  </main>
+    </main>
+
 </template>
 
 <script>
 export default {
-  name: 'UserApplications'
+  name: 'UserApplications',
 }
 </script>
 
 <style scoped>
-.maincontainer {
+.maincontainer{
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -93,15 +94,16 @@ form button {
   background: #6e93f7;
   transition: all 0.2s ease;
 }
-form button.active {
+.btn.active {
   background: #4070f4;
-  pointer-events: auto;
+  cursor: pointer;
 }
-form button:hover {
+.btn:hover {
   background: #0e4bf1;
+  cursor: pointer;
 }
 
 span {
-  color: gray;
+  color:gray;
 }
 </style>
