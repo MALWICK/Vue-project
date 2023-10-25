@@ -7,9 +7,13 @@
             <h2>This App will be added to your List of Installed Apps</h2>
           </div>
           <div class="innercont">
-            <h3>
-              <span class="attention">First! </span> Provide your User Inforamtion for this Platform
-            </h3>
+            <div class="smallheader">
+              <h3>
+                <span class="attention">First! </span> Provide your User Inforamtion for this
+                Platform
+              </h3>
+            </div>
+
             <form>
               <div class="first__row">
                 <div class="left__cont">
@@ -260,7 +264,7 @@ export default {
 
 .popup {
   width: 40.0625vw;
-  height: 40.98360655737705vh;
+  height: 44.98360655737705vh;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 0.8rem;
   display: flex;
@@ -290,15 +294,19 @@ export default {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16px;
+  padding: 3px 5px;
   /* background-color: green; */
 }
 
 .fullrow {
   width: 100%;
+  padding: 3px 5px;
+/*   background: rgb(0, 124, 128); */
 }
 
 .full__cont {
   width: 100%;
+ /*  background: green; */
 }
 
 .fullinput__holder {
@@ -331,7 +339,6 @@ export default {
 
 .left__cont {
   width: 49%;
-  /* s */
 }
 
 .label {
@@ -342,7 +349,6 @@ export default {
 
 .right__cont {
   width: 49%;
-  /*  background: blue; */
 }
 
 .input__holder {
@@ -389,15 +395,89 @@ input[type='text']:focus {
   justify-content: space-between;
   padding-left: 10px;
   padding-right: 10px;
+  margin-top: 7px;
 }
 
 .copy {
-  margin-right: 14px;
+  margin-right: 23px;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  background: #2d2f3157;
+}
+
+.copy:hover,
+.copy:focus {
+  background-color: black;
 }
 
 .attention {
   font-size: 24px;
   font-weight: 700;
   color: #007fff;
+}
+
+.confirm {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm button {
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  height: 40px;
+  width: 97%;
+  line-height: 20px;
+  list-style: none;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  background: #0080ffc7;
+}
+
+.confirm button:hover {
+  background: black;
+}
+
+.smallheader {
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content:center;
 }
 </style>
