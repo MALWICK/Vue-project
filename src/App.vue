@@ -3,6 +3,7 @@
     <div class="container">
       <div class="innercontainer">
         <div class="popup">
+          <button class="close">X</button>
           <div class="header">
             <h2>This App will be added to your List of Installed Apps</h2>
           </div>
@@ -268,9 +269,29 @@ export default {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 0.8rem;
   display: flex;
-
+  position:relative;
   flex-direction: column;
   padding: 4px 12px 2px;
+}
+
+.close {
+   position: absolute;
+  top: -8px;
+  right: -12px;
+  height: 55px;
+  width: 55px;
+  outline:none;
+  border:none;
+  border-radius:50%;
+  background: white;
+  box-shadow: rgba(61, 61, 63, 0.2) 0px 7px 29px 0px;
+  cursor:pointer;
+}
+
+.close:hover {
+  background: black;
+  color: #fff;
+  border:1px solid white !important; 
 }
 
 .innercont {
