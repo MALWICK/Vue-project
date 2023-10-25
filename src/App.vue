@@ -2,78 +2,80 @@
   <div>
     <div class="container">
       <div class="innercontainer">
-        <div class="popup">
-          <button class="close">X</button>
-          <div class="header">
-            <h2>This App will be added to your List of Installed Apps</h2>
+        <div class="content__body">
+          <div class="actioncontainer">
+            <button
+              class="usedAppsbutton"
+              :class="{ active: filter === 'Installed' }"
+              @click="showInstalledApps"
+            >
+              <i class="fa-solid fa-bolt-lightning"></i>Your Apps
+            </button>
+            <button
+              class="availableapps__btn"
+              :class="{ active: filter === 'Download' }"
+              @click="showDownloadedApps"
+            >
+              <i class="fa-brands fa-adn"></i> Apps Available
+            </button>
           </div>
-          <div class="innercont">
-            <div class="smallheader">
-              <h3>
-                <span class="attention">First! </span> Provide your User Inforamtion for this
-                Platform
-              </h3>
-            </div>
+          <div class="apps__display">
+            <div class="appsdisplay__container">
+              <div class="search">
+                <input type="text" v-model="input" placeholder="Search for an app" />
+              </div>
+              <div class="allaplic">
+                <h3>
+                  {{ title }} (
+                  {{ filter === 'Installed' ? installedAppsCount : availableAppsCount }} )
+                </h3>
+                <div class="allapliccontainer">
+                  <span
+                    _ngcontent-tpy-c49=""
+                    class="landing-apps"
+                    v-for="item in filteredItems"
+                    :key="item.id"
+                    @click="openModal"
+                    :class="{ shimmer: isLoading }"
+                  >
+                    <a _ngcontent-tpy-c49="" data-track="select application">
+                      <span
+                        _ngcontent-tpy-c49=""
+                        :class="{ activated: filter === 'Installed' }"
+                        class="new-features"
+                        >{{ item.status }}</span
+                      >
 
-            <form>
-              <div class="first__row">
-                <div class="left__cont">
-                  <span class="label">First Name</span>
-                  <div class="input__holder">
-                    <input
-                      type="text"
-                      class="first__name"
-                      placeholder="Enter your first name"
-                      value="Bata"
-                    />
-                  </div>
+                      <div _ngcontent-tpy-c49="" class="service-icon-logo">
+                        <img class="smallimg" _ngcontent-tpy-c49="" :src="item.logo" alt="Vend" />
+                      </div>
+                      <p _ngcontent-tpy-c49="">{{ item.apptitle }}</p>
+                    </a>
+                  </span>
+                  <p v-if="showMessage">{{ showMessage }}</p>
                 </div>
-                <div class="right__cont">
-                  <span class="label">Last Name</span>
-                  <div class="input__holder">
-                    <input
-                      type="text"
-                      class="first__name"
-                      placeholder="Enter your last Name"
-                      value="Humphrey"
-                    />
-                  </div>
+                <div class="loadmore">
+                  <button class="loadmore__btn">Load More</button>
                 </div>
               </div>
-              <div class="fullrow">
-                <div class="full__cont">
-                  <span class="label">Email Address</span>
-                  <div class="fullinput__holder">
-                    <input
-                      type="email"
-                      class="first__name"
-                      placeholder="Enter your first name"
-                      value="BataHumphrey@gmail.com"
-                    />
-                  </div>
-                </div>
-                <div class="apikey__cont">
-                  <p class="api__key">
-                    <span class="apispan">ApiKey:</span> Mh&resa18903679800387845*****
-                  </p>
-                  <button class="copy">Copy <i class="fa-solid fa-copy"></i></button>
-                </div>
-                <div class="confirm">
-                  <button>Confirm</button>
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+    <AppsPopup v-if="isOpen" :openModal="openModal" @close="openModal" />
+
 </template>
 
 <script>
+import AppsPopup from './pages/AppsPopup.vue'
 export default {
   name: 'UsersApplication',
-
+  components: {
+    AppsPopup
+  },
   data() {
     return {
       items: [
@@ -237,13 +239,79 @@ export default {
       timeout: null,
       input: '',
       debouncedInput: '',
-      isSearching: false
+      isSearching: false,
+      isOpen: false,
     }
   },
-  computed: {},
-  methods: {},
-  mounted() {},
-  watch: {}
+  computed: {
+    filteredItems() {
+      const filteredByFilter = this.filtereItems()
+      const filteredBySearch = this.debouncedSearch()
+
+      // Combine the results of both filters
+      return filteredByFilter.filter((item) => filteredBySearch.includes(item))
+    },
+    installedAppsCount() {
+      return this.items.filter((item) => item.status.toLowerCase() === 'installed').length
+    },
+    availableAppsCount() {
+      return this.items.filter((item) => item.status.toLowerCase() === 'download').length
+    },
+    showMessage() {
+      if (this.filteredItems.length === 0) {
+        return 'Item not found sorry!'
+      }
+      return ''
+    }
+  },
+  methods: {
+    showDownloadedApps() {
+      this.filter = 'Download'
+      this.title = 'Download More Apps'
+      this.isLoading = false
+      console.log(this.filter)
+    },
+    showInstalledApps() {
+      this.filter = 'Installed'
+      this.title = 'Installed App'
+      this.isLoading = false
+    },
+    filtereItems() {
+      if (this.filter === 'Download') {
+        return this.items.filter((item) => item.status.toLowerCase() === 'download')
+      }
+      if (this.filter === 'Installed') {
+        return this.items.filter((item) => item.status.toLowerCase() === 'installed')
+      }
+      return this.items
+    },
+
+    debouncedSearch() {
+      if (!this.debouncedInput) {
+        return this.items // Return all items if no search query
+      }
+
+      const query = this.debouncedInput.toLowerCase()
+      return this.items.filter((item) => item.apptitle.toLowerCase().includes(query))
+    },
+    openModal() {
+      this.isOpen = !this.isOpen;
+      console.log('james')
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isLoading = false
+    }, 2000)
+  },
+  watch: {
+    input() {
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        this.debouncedInput = this.input
+      }, 3000)
+    }
+  }
 }
 </script>
 
@@ -263,242 +331,255 @@ export default {
   justify-content: center;
 }
 
-.popup {
-  width: 40.0625vw;
-  height: 44.98360655737705vh;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  border-radius: 0.8rem;
-  display: flex;
-  position:relative;
-  flex-direction: column;
-  padding: 4px 12px 2px;
-}
-
-.close {
-   position: absolute;
-  top: -8px;
-  right: -12px;
-  height: 55px;
-  width: 55px;
-  outline:none;
-  border:none;
-  border-radius:50%;
-  background: white;
-  box-shadow: rgba(61, 61, 63, 0.2) 0px 7px 29px 0px;
-  cursor:pointer;
-}
-
-.close:hover {
-  background: black;
-  color: #fff;
-  border:1px solid white !important; 
-}
-
-.innercont {
+.content__body {
   width: 98%;
-  height: 100%;
-  padding: 5px 5px;
-  /*  background-color: red; */
 }
 
-.header {
-  width: 100%;
-  font-family: sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  border-bottom: 1px solid lightgray;
-}
-
-.first__row {
+.actioncontainer {
   width: 100%;
   display: flex;
+  flex-flow: row wrap;
+  margin: 0.5rem 0;
+  padding-bottom: 0;
+  padding-top: 0;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding: 3px 5px;
-  /* background-color: green; */
+  justify-content: flex-start;
+  gap: 2rem;
 }
 
-.fullrow {
-  width: 100%;
-  padding: 3px 5px;
-/*   background: rgb(0, 124, 128); */
-}
-
-.full__cont {
-  width: 100%;
- /*  background: green; */
-}
-
-.fullinput__holder {
-  width: 100%;
-  margin-top: 7px;
-}
-
-.fullinput__holder input {
-  min-width: 95%;
-
-  /*  border-radius: 0.6rem; */
-  outline: none;
-  margin: 0;
-  font-variant: tabular-nums;
-  list-style: none;
-  font-feature-settings: 'tnum', 'tnum';
-  position: relative;
-  display: inline-block;
-
-  padding: 8px 11px;
-  color: rgba(0, 0, 0, 0.85);
-  font-size: 14px;
-  line-height: 1.5715;
+.usedAppsbutton,
+.availableapps__btn {
+  border: 2px solid hsla(0, 0%, 50%, 0.8);
+  box-shadow: 0 7px 30px -10px rgb(150 170 180/50%);
+  width: 200px;
+  background-color: #f6f9ff;
   background-color: #fff;
-  background-image: none;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  transition: all 0.3s;
-}
-
-.left__cont {
-  width: 49%;
-}
-
-.label {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 25px;
-}
-
-.right__cont {
-  width: 49%;
-}
-
-.input__holder {
-  width: 100%;
-  margin-top: 7px;
-}
-
-.input__holder input {
-  min-width: 90%;
-  padding: 14px;
-
-  outline: none;
-  margin: 0;
-  font-variant: tabular-nums;
-  list-style: none;
-  font-feature-settings: 'tnum', 'tnum';
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  z-index: 1;
+  align-self: stretch;
   position: relative;
-  display: inline-block;
-
-  padding: 8px 11px;
-  color: rgba(0, 0, 0, 0.85);
-  font-size: 14px;
-  line-height: 1.5715;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  transition: all 0.3s;
-}
-
-input:hover {
-  border: 1px solid #007fff;
-  border-color: 1px solid #007fff;
-}
-
-input[type='text']:focus {
-  border: 1px solid #007fff;
-}
-
-.apikey__cont {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-top: 7px;
-}
-
-.copy {
-  margin-right: 23px;
-  border-radius: 8px;
-  border-style: none;
-  box-sizing: border-box;
-  color: #ffffff;
+  min-height: 55px;
+  border-radius: 0.5rem;
   cursor: pointer;
-  display: inline-block;
-  font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  height: 40px;
-  line-height: 20px;
-  list-style: none;
-  outline: none;
-  padding: 10px 16px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transition: color 100ms;
-  vertical-align: baseline;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  background: #2d2f3157;
 }
 
-.copy:hover,
-.copy:focus {
+.active {
+  border: 2px solid #0077f4;
+  box-shadow: 0 7px 30px -10px rgb(150 170 180/50%);
+  width: 200px;
+  background-color: #f6f9ff;
+  color: #2e2f31;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  z-index: 1;
+  align-self: stretch;
+  position: relative;
+  min-height: 55px;
+  border-radius: 0.5rem;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.apps__display {
+  width: 100%;
+  height: 66.559322033898304vh;
+  min-height: 60.559322033898304vh;
+  margin-top: 26px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 0.5rem;
+  overflow-y: scroll;
+}
+
+.appsdisplay__container {
+  width: 100%;
+  height: 100%;
+}
+
+.apps__display::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 0.8rem;
+}
+
+.apps__display::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(247, 247, 247, 0.3);
+  border-radius: 0.8rem;
+}
+
+.apps__display::-webkit-scrollbar-thumb {
+  background-color: rgb(189, 185, 185);
+  outline: 1px solid rgb(238, 236, 236);
+  border-radius: 0.8rem;
+}
+
+.search {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.search input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 0.5rem;
+  border: 2px solid #0077f4;
+}
+
+.allaplic {
+  width: 100%;
+}
+
+.allaplic h3 {
+  font-family: 'open sans Helvetica sans-serif';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 22px;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.service-icon-logo {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 35px;
+  box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-right: 10px;
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.service-icon-logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.landing-apps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  width: 272px;
+  min-height: 124px;
+  background-color: #fff;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+}
+
+.landing-apps:hover {
+  border: 1px solid #0077f4;
+  cursor: pointer;
+}
+
+.landing-apps a {
+  padding: 1rem 0.7rem 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #000;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 17px;
+  line-height: 19px;
+  font-style: normal;
+}
+.new-features {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 14px;
+  background-color: #00c3ff;
+  color: #fff;
+  border-radius: 0 0.75rem;
+  width: 80px;
+  text-align: center;
+  font-weight: 700;
+  padding: 1px;
+}
+
+.activated {
   background-color: black;
 }
 
-.attention {
-  font-size: 24px;
-  font-weight: 700;
-  color: #007fff;
+.smallimg {
+  width: 80%;
+  height: 50%;
 }
 
-.confirm {
+.loadmore {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
-.confirm button {
-  border-radius: 8px;
-  border-style: none;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  height: 40px;
-  width: 97%;
-  line-height: 20px;
-  list-style: none;
-  outline: none;
-  padding: 10px 16px;
+.loadmore__btn {
+  color: #fff;
+  font-weight: 600;
   position: relative;
+  background-color: #000000;
+  border-radius: 25px;
   text-align: center;
-  text-decoration: none;
-  transition: color 100ms;
-  vertical-align: baseline;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  background: #0080ffc7;
+  padding: 10px 30px;
+  width: 200px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
 }
 
-.confirm button:hover {
-  background: black;
+.loadmore__btn:hover {
+  background-color: #464343;
 }
 
-.smallheader {
-  width:100%;
+.allapliccontainer {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 18px 20px;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, #f6f7f8 8%, #eaebed 18%, #f6f7f8 33%);
+  background-size: 800px 104px;
+  animation: shimmer 1s infinite linear;
+}
+
+@media (max-width: 1024px) {
+  .content__body {
+    width: 99%;
+  }
+
+  .allapliccontainer {
+    align-items: center;
+    justify-content: center;
+  }
 }
 </style>
