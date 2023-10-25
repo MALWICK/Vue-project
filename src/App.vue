@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="container">
-      majot
+      <div class="innercontainer">
+        <div class="popup">
+
+        </div>
+      </div>
+     
     </div>
   </div>
 </template>
@@ -203,6 +208,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.popup {
+  width: 35.0625vw;
+  height: 40.98360655737705vh;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius:0.5rem;
+
 }
 
 
