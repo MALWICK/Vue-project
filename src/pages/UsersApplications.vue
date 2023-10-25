@@ -520,6 +520,8 @@ export default {
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .loadmore__btn {
@@ -546,7 +548,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 8px 20px;
+  gap: 18px 20px;
 }
 
 .shimmer::after {
