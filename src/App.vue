@@ -71,9 +71,7 @@
 </template>
 
 <script>
-/* import debounce from 'vue-debounce' */
 
-/* import _ from "lodash"; */
 
 export default {
   name: 'UsersApplication',
@@ -237,6 +235,7 @@ export default {
       timeout: null,
       input: '',
       debouncedInput: '',
+      isSearching: false,
     }
   },
   computed: {
@@ -321,7 +320,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background: orange; */
 }
 
 .content__body {
@@ -391,7 +389,6 @@ export default {
 
 .appsdisplay__container {
   width: 100%;
-  /* overflow-y: scroll; */
   height: 100%;
 }
 
@@ -425,7 +422,6 @@ export default {
 
 .allaplic {
   width: 100%;
-  /* background: orange; */
 }
 
 .allaplic h3 {
