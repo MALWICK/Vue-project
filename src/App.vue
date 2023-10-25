@@ -1,71 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <div class="innercontainer">
-        <div class="content__body">
-          <div class="actioncontainer">
-            <button
-              class="usedAppsbutton"
-              :class="{ active: filter === 'Installed' }"
-              @click="showInstalledApps"
-            >
-              <i class="fa-solid fa-bolt-lightning"></i>Your Apps
-            </button>
-            <button
-              class="availableapps__btn"
-              :class="{ active: filter === 'Download' }"
-              @click="showDownloadedApps"
-            >
-              <i class="fa-brands fa-adn"></i> Apps Available
-            </button>
-          </div>
-          <div class="apps__display">
-            <div class="appsdisplay__container">
-              <div class="search">
-                <input
-                  type="text"
-                  v-model="input"
-                  placeholder="Search for an app"
-                 
-                />
-              </div>
-              <div class="allaplic">
-                <h3>
-                  {{ title }} (
-                  {{ filter === 'Installed' ? installedAppsCount : availableAppsCount }} )
-                </h3>
-                <div class="allapliccontainer">
-                  <span
-                    _ngcontent-tpy-c49=""
-                    class="landing-apps"
-                    v-for="item in filteredItems"
-                    :key="item.id"
-                    :class="{ shimmer: isLoading }"
-                  >
-                    <a _ngcontent-tpy-c49="" data-track="select application">
-                      <span
-                        _ngcontent-tpy-c49=""
-                        :class="{ activated: filter === 'Installed' }"
-                        class="new-features"
-                        >{{ item.status }}</span
-                      >
-
-                      <div _ngcontent-tpy-c49="" class="service-icon-logo">
-                        <img class="smallimg" _ngcontent-tpy-c49="" :src="item.logo" alt="Vend" />
-                      </div>
-                      <p _ngcontent-tpy-c49="">{{ item.apptitle }}</p>
-                    </a>
-                  </span>
-                  <p v-if="showMessage">{{ showMessage }}</p>
-                </div>
-                <div class="loadmore">
-                  <button class="loadmore__btn">Load More</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      majot
     </div>
   </div>
 </template>

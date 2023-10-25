@@ -562,4 +562,16 @@ export default {
   background-size: 800px 104px;
   animation: shimmer 1s infinite linear;
 }
+
+
+@media (max-width: 1024px) {
+  .content__body {
+    width: 99%;
+  }
+
+  .allapliccontainer {
+    align-items: center;
+    justify-content: center;
+  }
+}
 </style>
