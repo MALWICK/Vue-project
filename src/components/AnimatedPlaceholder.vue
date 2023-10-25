@@ -1,42 +1,76 @@
 <template>
-  <div class="palceholder">&nbsp;</div>
+  <div>
+    <input type="text" v-model="input" />
+    <br />
+    <!-- {{ filteredItems }} -->
+    <ul v-for="item in filteredItems" :key="item.id">
+      <li>{{ item.apptitle }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-  defineProps: {
-    height: {
-      type: String
+  data() {
+    return {
+      input: '',
+      debouncedInput: '',
+      items: [
+      {id:1,
+      apptitle: 'Vend',
+      logo: 'https://pipedream.com/s.v0/app_mWnhAp/logo/48',
+      status: 'Download'
     },
-    width: {
-      type: String
+    {id:2,
+      apptitle: 'Airtable',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYI0SdC_3xBMmEvh43Dao1SI9Y_n7qqFeSbQ&usqp=CAU',
+      status: 'installed'
     },
-    borderRadius: {
-      type: String
+    {
+      id:3,
+      apptitle: 'shippo',
+      logo: 'https://assets-global.website-files.com/6462967bbf70fa5b5b227351/646bd3ac70ee08fca9869afe_shippo-logo-dark.svg',
+      status: 'Download'
+    },
+    {
+      id:4,
+      apptitle: 'Loyverse',
+      logo: 'https://loyverse.com/sites/all/themes/loyversecom/logo.svg',
+      status: 'installed'
+    },
+    {
+      id:5,
+      apptitle: 'storyChief',
+      logo: 'https://assets-global.website-files.com/62d66b587db794f6131223e0/62d679136a81955d33635572_logo.svg',
+      status: 'download'
+    },
+    {
+      id:6,
+      apptitle: 'Kanban Tools',
+      logo: 'https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/03/2a/24/032a241c-50ad-8fde-bfa4-cd5031e85b23/AppIcon-0-0-1x_U007emarketing-0-0-0-10-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png',
+      status: 'installed'
+    },
+      ],
+      timeout: null
+    }
+  },
+  computed: {
+    filteredItems() {
+      if (!this.debouncedInput) {
+        return this.items; // Return all items if no search query
+      }
+
+      const query = this.debouncedInput.toLowerCase();
+      return this.items.filter(item => item.apptitle.toLowerCase().includes(query));
+    }
+  },
+  watch: {
+    input() {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        this.debouncedInput = this.input;
+      }, 3000);
     }
   }
-}
+};
 </script>
-
-<style  scoped>
-@keyframes bgAnimate {
-  0% {
-    background-position: 50% 0;
-  }
-
-  100% {
-    background-position: -150% 0;
-  }
-}
-
-.palceholder {
-  height: v-bind(height);
-  width: v-bind(width);
-  border-radius: v-bind(borderRadius);
-  background-image: linear-gradient(to right, #d6d7d8 0%, #e2e3e2 10%, #d6d7d8 20%, #d6d7d8 100%);
-  background-size: 200% 100%;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 /0.1), 0 2px 4px -2px rgb(0 0 0 /0.1);
-  animation: bgAnimate 1.2s linear infinite;
-}
-</style>
-
